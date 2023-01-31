@@ -148,6 +148,7 @@ add_action( 'admin_head', 'blockhaus_fix_svg' );
     add_image_size( 'landscape', 800, 450, array( 'center', 'center' ) ); // adds 800 pixels wide by 450 pixels tall image option, hard crop mode
     add_image_size( 'profile', 300, 300, array( 'center', 'center' ) ); // adds 300 pixels wide by 300 pixels tall image option, hard crop mode
     add_image_size( 'blog', 500, 300, array( 'center', 'center' ) ); // adds 300 pixels wide by 300 pixels tall image option, hard crop mode
+    add_image_size( 'social', 800, 418, array( 'center', 'center' ) ); // adds 800 pixels wide by 418 pixels tall image option, hard crop mode
   }
   
   add_action( 'after_setup_theme', 'blockhaus_custom_images' );
@@ -157,7 +158,12 @@ add_action( 'admin_head', 'blockhaus_fix_svg' );
           'landscape' => __( 'Landscape' ),
           'profile' => __( 'Profile' ),
           'blog' => __( 'Blog layout' ),
+          'social' => __( 'Social' ),
       ) );
   }
   
   add_filter( 'image_size_names_choose', 'blockhaus_image_names' );
+  
+  // Add excerpt support to pages
+  
+  add_post_type_support('page', 'excerpt' );  

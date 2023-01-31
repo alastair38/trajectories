@@ -684,7 +684,7 @@ p a:focus {
           text-decoration-line: underline;
   -webkit-text-decoration-color: var(--wp--preset--color--accent);
           text-decoration-color: var(--wp--preset--color--accent);
-  text-decoration-thickness: 4px;
+  text-decoration-thickness: 2px;
 }
 
 main {
@@ -726,7 +726,7 @@ main {
 }
 
 #primary-menu li a:focus {
-  color: var(--wp--preset--color--secondary);
+  color: var(--wp--preset--color--neutral-dark-900);
 }
 
 .container {
@@ -2760,6 +2760,10 @@ figcaption {
 
   .lg\:p-6 {
     padding: 1.5rem;
+  }
+
+  .lg\:p-16 {
+    padding: 4rem;
   }
 
   .lg\:py-32 {

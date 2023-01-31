@@ -30,11 +30,11 @@
 <?php
 
 // Check rows exists.
-if( have_rows('details', 'option') ):?>
+if( have_rows('funder', 'option') ):?>
 
 	<ul class="flex gap-4 lg:gap-12 justify-center p-6 lg:w-3/4 mx-auto">
 <?php	// Loop through rows.
-	while( have_rows('details', 'option') ) : the_row();
+	while( have_rows('funder', 'option') ) : the_row();
 
 			// Load sub field value.
 			$logo_img = get_sub_field('logo');
@@ -45,8 +45,8 @@ if( have_rows('details', 'option') ):?>
 			// echo '</code>';
 			?>
 			<li class="flex-1 flex flex-col gap-4 items-center justify-center">
-				<a class="flex-1 bg-primary-default" href="<?php echo $url;?>">
-				<img class="object-contain px-2 h-full" src="<?php echo $logo_img['sizes']['medium'];?>" alt="<?php echo $logo_img['alt'];?>"/>
+				<a class="flex-1 bg-primary-default" href="<?php echo $url;?>" rel="external">
+				<img class="object-contain px-2 h-full" height="<?php echo $logo_img['sizes']['medium-height'];?>" width="<?php echo $logo_img['sizes']['medium-width'];?>" src="<?php echo $logo_img['sizes']['medium'];?>" alt="<?php echo $logo_img['alt'];?>" loading="lazy"/>
 			</a>
 			</li>
 			

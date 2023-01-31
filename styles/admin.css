@@ -18,16 +18,9 @@
   src: local(''), url('../assets/fonts/Montserrat-Regular.woff') format('woff');
 }
 
-.color-switcher .selected input[type='radio']:after {
-  content: '';
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  outline: 4px solid hotpink;
-  outline-offset: -1px;
+[id^='acf-editor'] {
+  font-family: 'Montserrat';
+  padding: 0.5rem;
 }
 
 /* bg-highlight
@@ -38,67 +31,77 @@ bg-accent-tertiary*/
   margin-bottom: 0.5rem;
 }
 
-.color-switcher .selected input[type='radio'][value='offset']:after {
-  background-color: var(--wp--preset--color--offset);
+.acf-field-group > .acf-label label {
+  background-color: var(--wp--preset--color--neutral-dark-100);
+  color: white !important;
+  font-weight: 900;
+  width: fit-content;
+  padding: 0.25rem 0.75rem;
 }
 
-.color-switcher .selected input[type='radio'][value='accent-quarter']:after {
-  background-color: var(--wp--preset--color--accent-quarter);
-}
-
-.color-switcher .selected input[type='radio'][value='highlight']:after {
-  background-color: var(--wp--preset--color--highlight);
-}
-
-.color-switcher .selected input[type='radio'][value='accent-secondary']:after {
-  background-color: var(--wp--preset--color--accent-secondary);
-}
-
-.color-switcher .selected input[type='radio'][value='accent-tertiary']:after {
-  background-color: var(--wp--preset--color--accent-tertiary);
-}
-
-.color-switcher input[type='radio'][value='offset'] {
-  background-color: var(--wp--preset--color--offset);
-}
-
-.color-switcher input[type='radio'][value='accent-quarter'] {
-  background-color: var(--wp--preset--color--accent-quarter);
-}
-
-.color-switcher input[type='radio'][value='highlight'] {
-  background-color: var(--wp--preset--color--highlight);
-}
-
-.color-switcher input[type='radio'][value='accent-secondary'] {
-  background-color: var(--wp--preset--color--accent-secondary);
-}
-
-.color-switcher input[type='radio'][value='accent-tertiary'] {
-  background-color: var(--wp--preset--color--accent-tertiary);
-}
-
-.color-switcher input[type='radio'] {
-  position: relative;
-
-  width: 2rem;
-  height: 2rem;
+.color-choice label:has(input[value]) {
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-.color-switcher ul.acf-radio-list.acf-bl label {
   color: transparent;
-  font-size: 1px;
-  display: inline-flex !important;
+  border-radius: 6px;
+  padding-block: 0.5rem;
 }
 
-.color-switcher ul.acf-radio-list.acf-bl {
+.block-editor__container .color-choice label:has(input[value]) {
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+}
+
+.acf-switch,
+.acf-button-group {
   display: flex;
-  padding: 0;
-  margin: 0;
-  align-items: center;
+  justify-content: space-around;
+  margin-top: 0.5rem;
+}
+
+.acf-input p.description {
+  font-style: italic;
+  font-size: 12px;
+  color: tomato;
+}
+
+.components-panel__body-title .components-panel__body-toggle.components-button {
+  font-weight: 900;
+}
+
+#poststuff .postbox-header h2.hndle.ui-sortable-handle {
+  font-size: inherit;
+}
+
+.color-choice label.selected:has(input[value]) {
+  outline: 3px solid #222;
+  outline-offset: 2px;
+}
+
+.color-choice .acf-button-group {
+  gap: 1rem;
+  justify-content: space-between;
+  width: 100%;
+}
+
+label:has(input[type='radio'][value='offset']) {
+  background-color: var(--wp--preset--color--offset);
+}
+
+label:has(input[type='radio'][value='accent-quarter']) {
+  background-color: var(--wp--preset--color--accent-quarter);
+}
+
+label:has(input[type='radio'][value='highlight']) {
+  background-color: var(--wp--preset--color--highlight);
+}
+
+label:has(input[type='radio'][value='accent-secondary']) {
+  background-color: var(--wp--preset--color--accent-secondary);
+}
+
+label:has(input[type='radio'][value='accent-tertiary']) {
+  background-color: var(--wp--preset--color--accent-tertiary);
 }
 
 .acf-postbox,

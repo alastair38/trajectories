@@ -15,6 +15,8 @@ endif;
 
 $post_type_obj = get_post_type_object( $post_type );
 
+$postTypeMeta = get_field($post_type . '_page_settings', "options");
+
 $description = get_field($post_type . '_page_description', "options");
 ?>
 
@@ -29,12 +31,13 @@ $description = get_field($post_type . '_page_description', "options");
 			</div>
 				
 			<?php
+			
+			if($postTypeMeta['page_description']):?>
 
-			if($description):?>
-
-			<p class="col-span-full"><?php echo $description;?></p>
-
+				<div class="col-span-full"><?php echo $postTypeMeta['page_description'];?></div>
+	
 			<?php endif;?>
+
 
 			<?php if ( have_posts() ) :
 			/* Start the Loop */;

@@ -1,112 +1,328 @@
 <?php
 /**
- * Adds SEO descriptions for archive pages and singular post types pages. This function depends on descriptions being set for taxonomies and the Blockhaus Functionality plugin being activated to provide options for CPT archive descriptions
+ * Adds meta tags, open graph tags and schema json-ld data to the head
  *
  * @package blockhaus
  */
-
-
-function blockhaus_meta_description() {
-
+function blockhaus_metaTags() {
+  //if(function_exists('get_field')):
   global $post;
-  if ( is_singular() && !is_front_page() ) {
-      $post_description = strip_tags($post->post_content);
-      // $post_description = strip_shortcodes( $post->post_content );
-      $post_description = str_replace( array("\n", "\r", "\t"), ' ', $post_description );
-      $post_description = mb_substr( $post_description, 0, 310, 'utf8' );
-      $post_description = normalize_whitespace($post_description);
-      echo '<meta name="description" content="' . $post_description . '" />' . "\n";
-  }
+ 
+	$content = new stdClass;
+	$post_type = get_post_type();
+  $blogDesc = get_bloginfo( "description" );
+  $content->siteName = get_bloginfo( "name" );
   
-  if ( is_home() && !is_front_page() ) {
-  		$blog_page_description = get_field("post_page_description", "options");
-      if($blog_page_description):
-  		$blog_page_description = strip_tags($blog_page_description);
-  		$blog_page_description = normalize_whitespace($blog_page_description);
-      echo '<meta name="description" content="' . $blog_page_description . '" />' . "\n";
-      endif;
-  }
+  if(function_exists('get_field')):
+    $socialImage = get_field('social_image', 'options');
+  endif;
   
-  if ( is_front_page() ) {
-      echo '<meta name="description" content="' . get_bloginfo( "description" ) . '" />' . "\n";
-  }
-  if ( is_category() ) {
-      $category_description = strip_tags(category_description());
-      if($category_description):
-      $category_description = normalize_whitespace($category_description);
-      echo '<meta name="description" content="' . $category_description . '" />' . "\n";
-      endif;
-  }
-
-  if ( is_tax() ) {
-      $term_description = strip_tags(term_description());
-      if($term_description):
-      $term_description = normalize_whitespace($term_description);
-      echo '<meta name="description" content="' . $term_description . '" />' . "\n";
-      endif;
-  }
-
-    // get registered public custom post types
-    $args = array(
-      'public'   => true,
-      '_builtin' => false
-     );
-  
-  
-    $output = 'names'; // 'names' or 'objects' (default: 'names')
-    $operator = 'and'; // 'and' or 'or' (default: 'and')
-      
-    $post_types = get_post_types( $args, $output, $operator );
+  if(is_singular() && !is_page()):
+      $content->type = "article";
+  else:
+      $content->type = "website";
+  endif;
     
-    // loop through all registered public custom post types and add them to the $types_to_search array
-  
-    if ( $post_types ) { // If there are any custom public post types.
-        foreach ( $post_types  as $post_type ) { // loop through
-          if ( is_post_type_archive($post_type) ) { // check if on the archive page for that post type
-            $description = get_field($post_type . "_page_description", "options"); // get post type page description from options page
-            if($description): // if description exists, add it to the head
-            $description = strip_tags($description);
-            $description = normalize_whitespace($description);
-            echo '<meta name="description" content="' . $description . '" />' . "\n";
-            endif;
-        }
+	if((is_archive() || (is_home() && ! is_front_page())) && ! is_search() && ! is_author()):
+
+		if(is_home()):
+      
+    $content->title = single_post_title('',false);
+      
+    else:
+      
+		$content->title = get_the_archive_title();
+    
+    endif;
+    
+		$contentSettings = get_field(get_post_type() . '_page_settings', 'options');
+		$content->image = $contentSettings['header_image']['sizes']['social'];
+    
+    $content->description =  $contentSettings['page_description'];
+    
+    if($content->description):
+      $content->description = strip_tags($content->description);
+    else:
+      $content->description = $blogDesc;
+		endif;
+    
+    if(!$content->image):
+      $content->image =  $socialImage['sizes']['social'];
+    endif;
+    
+    $content->permalink = get_post_type_archive_link($post_type);
+    
+    if(is_home()):?>
+    
+    <script type="application/ld+json">
+      {
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          "@id": "<?php echo $content->permalink; ?>",
+          "mainEntityOfPage": "<?php echo $content->permalink; ?>",
+          "name": "<?php echo $content->title; ?>",
+          "description": "<?php echo $content->description; ?>",
+          "image": "<?php echo $content->image; ?>",
+          "publisher": {
+              "@type": "Organization",
+              "name": "<?php echo $content->siteName; ?>"
+          }
       }
-    }
-}
-add_action( 'wp_head', 'blockhaus_meta_description');
+      </script>
+      
+    <?php else:?>
+      
+      <script type="application/ld+json">
+      {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "<?php echo $content->title; ?>",
+          "description": "<?php echo $content->description; ?>",
+          "publisher": {
+              "@type": "Organization",
+              "name": "<?php echo $content->siteName; ?>"
+          }
+      }
+      </script>
+    
+    <?php endif;
 
-function blockhaus_opengraph() {
-  global $post;
-    if(is_singular()) {
-    if(has_post_thumbnail($post->ID)) {
-    $img_src = wp_get_attachment_image_src(get_post_thumbnail_id( $post->ID ), 'large');
-    $img = $img_src[0];
-    } else {
-    $default_img = get_field(get_post_type() . '_header', 'options');
-    $img = $default_img['url'];
-    }
-    if(has_excerpt()) {
-    $excerpt = strip_tags($post->post_excerpt);
-    $excerpt = str_replace("", "'", $excerpt);
-    } else {
-    $excerpt = get_bloginfo('description');
-    }
+	elseif(is_singular() && ! is_front_page()):
+
+		$content->title = get_the_title();
+    
+    if(has_excerpt() && is_singular()):
+      $content->description = strip_tags($post->post_excerpt);
+      $content->description = str_replace("", "'", $content->description);
+    else:
+      $content->description = strip_tags($post->post_content);
+      $content->description = preg_replace('/\s+/', ' ', $content->description);
+      $content->description = str_replace("&nbsp;", " ", $content->description);
+      $content->description = substr($content->description, 0, 160);
+    endif;
+    
+    if(has_post_thumbnail($post->ID)):
+      $img_src = wp_get_attachment_image_src(get_post_thumbnail_id( $post->ID ), 'social');
+      $content->image = $img_src[0];#
+    else:
+      $content->image = $socialImage['sizes']['social'];
+    endif;
+    
+    $content->permalink = get_the_permalink();
+    
+    if($post_type === 'page'):?>
+    
+      <script type="application/ld+json">
+      {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "<?php echo $content->title; ?>",
+          "description": "<?php echo $content->description; ?>",
+          "publisher": {
+              "@type": "Organization",
+              "name": "<?php echo $content->siteName; ?>"
+          }
+      }
+      </script>
+      
+    <?php endif;
+    
+    if($post_type === 'post') :?>
+      <script type="application/ld+json">
+      {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": "<?php echo $content->title; ?>",
+          "author": {
+              "@type": "Person",
+              "name": "<?php echo get_the_author_meta('display_name', $post->post_author); ?>"
+          },
+          "datePublished" : "<?php echo get_the_date();?>",
+          "dateModified" : "<?php echo get_the_modified_date('Y-m-d');?>",
+          "description": "<?php echo $content->description; ?>",
+          "mainEntityOfPage" : "<?php echo $content->permalink; ?>",
+          "image": "<?php echo $content->image; ?>",
+          "publisher": {
+              "@type": "Organization",
+              "name": "<?php echo $content->siteName; ?>"
+          }
+      }
+      </script>
+    <?php endif;
+    
+    if($post_type === 'project') :?>
+      <script type="application/ld+json">
+      {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "<?php echo $content->title; ?>",
+          "author": {
+              "@type": "Person",
+              "name": "<?php echo get_the_author_meta('display_name', $post->post_author); ?>"
+          },
+          "datePublished" : "<?php echo get_the_date();?>",
+          "dateModified" : "<?php echo get_the_modified_date('Y-m-d');?>",
+          "description": "<?php echo $content->description; ?>",
+          "mainEntityOfPage" : "<?php echo $content->permalink; ?>",
+          "image": "<?php echo $content->image; ?>",
+          "publisher": {
+              "@type": "Organization",
+              "name": "<?php echo $content->siteName; ?>"
+          }
+      }
+      </script>
+    <?php endif;
+    
+    if($post_type === 'publication'):
+    $sameAs = get_field('external_link', $post->ID);
+    $external_site = get_field('external_site', $post->ID);
     ?>
-    <meta property="og:title" content="<?php echo the_title(); ?>"/>
-    <meta property="og:description" content="<?php echo $excerpt; ?>"/>
-    <meta property="og:type" content="article"/>
-    <meta property="og:url" content="<?php echo the_permalink(); ?>"/>
-    <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
-    <meta property="og:image" content="<?php echo $img; ?>"/>
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="<?php echo the_permalink(); ?>" />
-    <meta name="twitter:title" content="<?php echo the_title(); ?>" />
-    <meta name="twitter:description" content="<?php echo $excerpt; ?>" />
-    <meta name="twitter:image" content="<?php echo $img_src[0]; ?>" />
-    <?php
-    } else {
-    return;
+      <script type="application/ld+json">
+      {
+          "@context": "https://schema.org",
+          "@type": "ScholarlyArticle",
+          "headline": "<?php echo $content->title; ?>",
+          "author": {
+              "@type": "Person",
+              "name": "<?php echo get_the_author_meta('display_name', $post->post_author); ?>"
+          },
+          "datePublished" : "<?php echo get_the_date();?>",
+          "dateModified" : "<?php echo get_the_modified_date('Y-m-d');?>",
+          "description": "<?php echo $content->description; ?>",
+          "mainEntityOfPage" : "<?php echo $content->permalink; ?>",
+          "sameAs": "<?php echo $sameAs; ?>",
+          "image": "<?php echo $content->image; ?>",
+          "publisher": {
+              "@type": "Organization",
+              "name": "<?php echo $external_site; ?>"
+          }
+      }
+      </script>
+    
+    <?php endif;
+    
+    if($post_type === 'link'):
+      $sameAs = get_field('external_link', $post->ID);
+      $external_site = get_field('external_site', $post->ID);
+      ?>
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "<?php echo $content->title; ?>",
+            "author": {
+                "@type": "Person",
+                "name": "<?php echo get_the_author_meta('display_name', $post->post_author); ?>"
+            },
+            "datePublished" : "<?php echo get_the_date();?>",
+            "dateModified" : "<?php echo get_the_modified_date('Y-m-d');?>",
+            "description": "<?php echo $content->description; ?>",
+            "mainEntityOfPage" : "<?php echo $content->permalink; ?>",
+            "sameAs": "<?php echo $sameAs; ?>",
+            "image": "<?php echo $content->image; ?>",
+            "publisher": {
+                "@type": "Organization",
+                "name": "<?php echo $external_site; ?>"
+            }
+        }
+        </script>
+      
+    <?php endif;
+ 
+ elseif(is_author()):
+    
+    global $wp_query;
+    
+    $query = $wp_query->query_vars;
+    $curauth = $query['author'];
+    
+    $content->title = get_the_author_meta( 'nicename', $curauth );
+    
+    $content->description = get_field('profile_biography', 'user_' . $curauth);
+    $content->description = strip_tags($content->description);
+    $content->description = substr($content->description, 0, 160);
+         
+    if(!$content->description) {
+      $content->description = $blogDesc;
     }
-  }
+    
+    $author_img = get_field('profile_image', 'user_' . $curauth);
+    $content->image = $author_img['sizes']['social'];
+       
+    if(!$content->image) {
+      $default_img = get_field('page_header', 'options');
+      $content->image = $socialImage['sizes']['social'];
+    }
+   
+    $content->permalink = get_author_posts_url($curauth);?>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "person",
+        "name": "<?php echo $content->title; ?>",
+        "disambiguatingDescription": "<?php echo $content->description; ?>",
+        "image": "<?php echo $content->image; ?>",
+        "url": "<?php echo $content->permalink; ?>"
+    }
+    </script>
 
-  add_action('wp_head', 'blockhaus_opengraph', 10);
+  <?php else:
+    
+    $content->title = $content->siteName;
+    $content->description = $blogDesc;
+    
+    if(has_post_thumbnail($post->ID)):
+      $img_src = wp_get_attachment_image_src(get_post_thumbnail_id( $post->ID ), 'social');
+      $content->image = $img_src[0];#
+    else:
+      $content->image = $socialImage['sizes']['social'];
+    endif;
+    
+    $content->permalink = get_site_url();?>
+    
+    <script type="application/ld+json">
+    {
+         "@context": "https://schema.org",
+         "@type": "WebSite",
+         "name": "<?php echo $content->title; ?>",
+         "url": "<?php echo $content->permalink;?>",
+         "description": "<?php echo $content->description; ?>",
+         "publisher": {
+             "@type": "Organization",
+             "name": "<?php echo $content->siteName; ?>"
+         }
+     }
+    </script>
+	
+  <?php endif;?>
+  
+  <!-- blockhaus_metaTags -->
+  
+    <link rel="canonical" href="<?php echo $content->permalink; ?>">
+    <meta name="description" content="<?php echo $content->description; ?>"/>
+    <meta property="og:site_name" content="<?php echo $content->siteName; ?>"/>
+    <meta property="og:title" content="<?php echo $content->title; ?>"/>
+    <meta property="og:description" content="<?php echo $content->description; ?>"/>
+    <meta property="og:type" content="<?php echo $content->type; ?>"/>
+    <meta property="og:url" content="<?php echo $content->permalink; ?>"/>
+    <meta property="og:image" content="<?php echo $content->image; ?>"/>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="<?php echo $content->permalink; ?>" />
+    <meta name="twitter:title" content="<?php echo $content->title; ?>" />
+    <meta name="twitter:description" content="<?php echo $content->description; ?>" />
+    <meta name="twitter:image" content="<?php echo $content->image; ?>" />
+  
+  <?php }
+
+add_action('wp_head', 'blockhaus_metaTags', 10);
+  
+function filter_document_title( $title ) {
+  if ( is_front_page() && !is_home() ) {
+      $title = get_bloginfo('title') . ' - Home'; 
+
+      return $title; 
+  }
+}
+
+add_filter( 'pre_get_document_title', 'filter_document_title' );

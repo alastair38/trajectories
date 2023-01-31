@@ -14,7 +14,8 @@
 
 get_header();
 
-$description = get_field(get_post_type() . '_page_description', "options");
+$postTypeMeta = get_field(get_post_type() . '_page_settings', "options");
+
 
 ?>
 
@@ -35,10 +36,10 @@ $description = get_field(get_post_type() . '_page_description', "options");
 				
 			endif;
 
-			if($description):?>
+			if($postTypeMeta['page_description']):?>
 
-			<p class="col-span-full"><?php echo $description . $post_type;?></p>
-
+				<div class="col-span-full"><?php echo $postTypeMeta['page_description'];?></div>
+	
 			<?php endif;
 
 			/* Start the Loop */
