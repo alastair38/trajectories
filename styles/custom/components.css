@@ -112,7 +112,7 @@
 } */
 
 [class*='blockhaus-profile'] img {
-  @apply w-full md:w-auto;
+  @apply w-full;
 }
 
 [class*='blockhaus-quote'] cite {

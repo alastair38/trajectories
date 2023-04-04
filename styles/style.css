@@ -908,14 +908,7 @@ main {
   width: 100%;
 }
 
-@media (min-width: 768px) {
-  [class*='blockhaus-profile'] img {
-    width: auto;
-  }
-}
-
 [class*='blockhaus-quote'] cite {
-  max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
   border-radius: 9999px;
@@ -1667,7 +1660,6 @@ input[type='text'], input[type='email'], textarea {
 }
 
 .sticky {
-  position: -webkit-sticky;
   position: sticky;
 }
 
@@ -1802,6 +1794,10 @@ input[type='text'], input[type='email'], textarea {
   aspect-ratio: 1 / 1;
 }
 
+.h-80 {
+  height: 20rem;
+}
+
 .h-full {
   height: 100%;
 }
@@ -1826,10 +1822,6 @@ input[type='text'], input[type='email'], textarea {
   height: 1.5rem;
 }
 
-.h-80 {
-  height: 20rem;
-}
-
 .h-0 {
   height: 0px;
 }
@@ -1838,12 +1830,15 @@ input[type='text'], input[type='email'], textarea {
   width: 80%;
 }
 
+.w-80 {
+  width: 20rem;
+}
+
 .w-3\/4 {
   width: 75%;
 }
 
 .w-fit {
-  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
@@ -1870,22 +1865,6 @@ input[type='text'], input[type='email'], textarea {
 
 .w-6 {
   width: 1.5rem;
-}
-
-.w-80 {
-  width: 20rem;
-}
-
-.min-w-fit {
-  min-width: -webkit-fit-content;
-  min-width: -moz-fit-content;
-  min-width: fit-content;
-}
-
-.max-w-fit {
-  max-width: -webkit-fit-content;
-  max-width: -moz-fit-content;
-  max-width: fit-content;
 }
 
 .flex-1 {
@@ -2491,7 +2470,6 @@ figcaption {
 }
 
 .group:hover .group-hover\:w-max {
-  width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
 }
@@ -2708,7 +2686,6 @@ figcaption {
   }
 
   .lg\:w-fit {
-    width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
   }
