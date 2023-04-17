@@ -55,7 +55,7 @@ require get_template_directory() . '/inc/search.php';
  * Add customized main navigation
  */
 
-require get_template_directory() . '/inc/navigation.php';
+//require get_template_directory() . '/inc/navigation.php';
 
 /**
  * Block patterns

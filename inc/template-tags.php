@@ -204,7 +204,7 @@ function blockhaus_header_layout() {
 
 		if(function_exists('get_field')):
 		$header->showImage = get_field('background_image_layout');
-		$header->background =  get_field('choose_background');
+		$header->background =  get_field('background_color');
 		$header->contain =  get_field('contain_image');
 		// $header->mono =  get_field('mono_image');
 		$header->position =  get_field('position_image');

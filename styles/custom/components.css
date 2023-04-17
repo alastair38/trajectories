@@ -1,3 +1,9 @@
+/* IMAGE ALIGNMENTS */
+
+.wp-block-image.aligncenter {
+  @apply mx-auto;
+}
+
 /* FRONT PAGE */
 
 .blockhaus-gallery
@@ -112,7 +118,7 @@
 } */
 
 [class*='blockhaus-profile'] img {
-  @apply w-full;
+  @apply w-full shadow-md rounded-md;
 }
 
 [class*='blockhaus-quote'] cite {
@@ -170,7 +176,7 @@ blockquote.blockhaus-quote:after {
 }
 
 iframe {
-  @apply border-[6px] border-white rounded-md mx-auto;
+  @apply mx-auto;
 }
 
 @media (max-width: 640px) {
