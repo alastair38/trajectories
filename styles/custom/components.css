@@ -318,13 +318,13 @@ form#loginform [type='checkbox'] {
 }
 
 form#loginform [type='password'] {
-  @apply py-1 bg-white rounded-full border border-neutral-light-500;
+  @apply py-1 bg-white rounded-full border border-neutral-light-500 ring-4 ring-transparent hover:ring-highlight focus:ring-highlight;
 }
 
 form#loginform [type='text'] {
-  @apply bg-white rounded-full border border-neutral-light-500;
+  @apply bg-white rounded-full border border-neutral-light-500 ring-4 ring-transparent hover:ring-highlight focus:ring-highlight;
 }
 
 form#loginform input#wp-submit {
-  @apply bg-offset py-1 px-2 shadow-retro border border-current cursor-pointer;
+  @apply bg-primary-default py-1 px-3 rounded-md border ring-4 ring-transparent border-current cursor-pointer hover:ring-highlight focus:ring-highlight;
 }
