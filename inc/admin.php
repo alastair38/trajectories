@@ -81,6 +81,7 @@ function blockhaus_dashboard_widget_render() {
   <p><?php echo 'Hi, <span class="name">' . $current_user->display_name . '</span>. Welcome to ' . get_bloginfo( 'name' ) . '.' ?></p>
 
   <p><?php esc_html_e('This dashboard gives you quick access to information about your site and the main content areas.' , "blockhaus" );?></p>
+ 
    
     <a href="/wp-admin/profile.php">
       <svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -113,6 +114,7 @@ function blockhaus_dashboard_widget_render() {
       </a>
     </div>
   </div>
+  
 
   <?php
 
@@ -172,6 +174,22 @@ endif;
     </a>
    
   </div>
+  <div class="guides settings">
+    <h2>Guides 📑</h2>
+    <div class="guide">
+      <iframe src="https://scribehow.com/embed/Trajectories_login__VKOPIiaWRE-1sSmhtUZO8A" width="100%" height="640" allowfullscreen frameborder="0"></iframe>
+      <p>
+        <a href="https://scribehow.com/shared/Trajectories_login__VKOPIiaWRE-1sSmhtUZO8A">Share this guide</a>
+      </p>
+    </div>
+    <div class="guide">
+    <iframe src="https://scribehow.com/embed/Creating_a_blog_post__i1rA9exGSom58n_6SJdJfA" width="100%" height="640" allowfullscreen frameborder="0"></iframe>
+      <p>
+        <a href="https://scribehow.com/shared/Creating_a_blog_post__i1rA9exGSom58n_6SJdJfA">Share this guide</a>
+      </p>
+    </div>
+  </div>
+  
 <?php }
 
 function blockhaus_admin_bar_remove_logo() {
