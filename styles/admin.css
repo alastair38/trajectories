@@ -31,6 +31,35 @@ bg-accent-tertiary*/
   margin-bottom: 0.5rem;
 }
 
+[data-type='message'] {
+  background: #9df5eb;
+  border-radius: 6px 6px 0 0;
+}
+
+.acf-block-body .acf-block-fields {
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.acf-fields > .acf-tab-wrap {
+  background: transparent !important;
+}
+
+.acf-fields > .acf-tab-wrap .acf-tab-group {
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+}
+
+.acf-tab-group li a {
+  border-bottom: 1px solid !important;
+  border-radius: 30px !important;
+  border-color: #cccccc !important;
+}
+
+.acf-block-body .acf-block-fields .acf-tab-wrap .acf-tab-group {
+  padding-bottom: 16px !important;
+}
+
 .acf-field-group > .acf-label label {
   background-color: var(--wp--preset--color--neutral-dark-100);
   color: white !important;
