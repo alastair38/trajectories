@@ -32,8 +32,7 @@ bg-accent-tertiary*/
 }
 
 [data-type='message'] {
-  background: #9df5eb;
-  border-radius: 6px 6px 0 0;
+  /* background: #9df5eb; */
 }
 
 .acf-block-body .acf-block-fields {
@@ -86,6 +85,10 @@ bg-accent-tertiary*/
   display: flex;
   justify-content: space-around;
   margin-top: 0.5rem;
+}
+
+.acf-switch {
+  width: max-content;
 }
 
 .acf-input p.description {

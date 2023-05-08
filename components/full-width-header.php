@@ -7,39 +7,7 @@
  * @package blockhaus
  */
 
-// $post_type = get_post_type();
-
-
-// if(is_archive() && ! is_search()):
-// 	$header_image = get_field($post_type . '_header', 'options');
-// 	$transparent_image = get_field($post_type . '_page_transparent_header', 'options');
-// 	$background =  get_field($post_type . '_choose_background', 'options');
-// 	$title = get_the_archive_title();
-// elseif ( is_home() && ! is_front_page() ) :
-// 	$header_image = get_field($post_type . '_header', 'options');
-// 	$transparent_image = get_field($post_type . '_page_transparent_header', 'options');
-// 	$background =  get_field($post_type . '_choose_background', 'options');
-// 	$title = single_post_title('',false);
-// elseif (is_search()):
-// 	$header_image = get_field('search_header', 'options');
-// 	$transparent_image = get_field('search_page_transparent_header', 'options');
-// 	$background =  get_field('search_choose_background', 'options');
-// 	$title = 	'<span class="underline decoration-accent-secondary decoration-4">Search results for: ' . get_search_query() . '</span>';
-// else:
-// 	$background_image = get_field('background_image_layout');
-// 	$transparent_image = get_field('transparent_image_layout');
-// 	$background =  get_field('choose_background');
-// 	$title = get_the_title();
-// endif;
-
-
-// if(!$background):
-// 	$background = 'no';
-// endif;
-
 $header = blockhaus_header_layout();
-
-//var_dump($header);
 
 ?>
 
@@ -47,13 +15,15 @@ $header = blockhaus_header_layout();
 
 <h1 class="page-title z-0 mb-6 w-11/12 lg:w-fit mx-auto lg:ml-[12.5%] col-start-1 row-start-1 place-self-end leading-snug lg:leading-normal justify-self-start bg-primary-default text-lg lg:text-gigantic px-6 font-black uppercase"><?php echo $header->title;?></h1>
 
-<?php if($header->image):?>
-<img class="h-80 <?php print($header->contain ? 'object-contain p-6 lg:p-16' : 'object-cover');?>  <?php print($header->position == 'left' ? '' : 'place-self-end');?> col-start-1 row-start-1" height="<?php echo $header->image['height'];?>" width="<?php echo $header->image['width'];?>"  src="<?php echo $header->image['url'];?>" alt="<?php echo $header->image;?>">
-<?php endif;?>
+
 
 <?php if(is_singular() && has_post_thumbnail() && $header->showImage):
 	the_post_thumbnail( 'full', ['class' => 'w-full h-80 col-start-1 row-start-1 object-cover'] );
- endif;?>
+	
+elseif($header->showImage):?>
+		<img class="h-80 object-cover col-start-1 row-start-1" height="<?php echo $header->showImage['height'];?>" width="<?php echo $header->showImage['width'];?>"  src="<?php echo $header->showImage['url'];?>" alt="<?php echo $header->showImage;?>">
+		
+<?php endif;?>
 
 </header><!-- .page-header -->
 

@@ -126,7 +126,7 @@
 }
 
 .blockhaus-search input[type='search'] {
-  @apply py-1 px-4 border border-current shadow-retro focus-visible:outline-none focus-visible:ring-green-400 focus-visible:ring-4;
+  @apply py-1 px-4 border border-current focus-visible:outline-none focus-visible:ring-green-400 focus-visible:ring-4;
 }
 
 .blockhaus-search label {
@@ -229,10 +229,6 @@ iframe {
 }
 
 /* POSTS & PAGES */
-
-.is-style-button-retro .wp-block-button__link {
-  @apply shadow-retro;
-}
 
 .is-style-button-rounded .wp-block-button__link {
   @apply rounded-full;

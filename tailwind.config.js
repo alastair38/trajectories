@@ -1,4 +1,4 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   content: [
@@ -7,6 +7,19 @@ module.exports = {
     './js/*.js',
     './functions.php',
     '../../plugins/blockhaus-functionality/includes/blocks/**/*.php',
+  ],
+  safelist: [
+    'rounded-blob',
+    'object-right',
+    'object-left',
+    'object-center',
+    'aspect-video',
+    'aspect-hero',
+    'gap-x-12',
+    'gap-y-6',
+    'p-0',
+    'ring-offset-accent-default',
+    'grid-cols-fill',
   ],
   theme: {
     fontFamily: {
@@ -61,12 +74,15 @@ module.exports = {
         'waves-alt':
           "url('http://michellepentecost.local/wp-content/themes/blockhaus/assets/images/backgrounds/waves-45.svg')",
       },
-      boxShadow: {
-        retro: '2px 2px 0 0 currentColor',
+      aspectRatio: {
+        hero: '16 / 11',
+      },
+      borderRadius: {
+        blob: '61% 39% 36% 64% / 47% 50% 50% 53%',
       },
       gridTemplateColumns: {
         // Complex site-specific column configuration
-        header: '12.5% 1fr 12.5%',
+        fill: 'repeat(auto-fit, minmax(300px, 1fr))',
       },
       typography: {
         DEFAULT: {
@@ -91,4 +107,4 @@ module.exports = {
       strategy: 'base', // only generate global styles
     }),
   ],
-}
+};

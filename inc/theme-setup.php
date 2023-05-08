@@ -147,6 +147,7 @@ add_action( 'admin_head', 'blockhaus_fix_svg' );
   function blockhaus_custom_images() {
     add_image_size( 'landscape', 800, 450, array( 'center', 'center' ) ); // adds 800 pixels wide by 450 pixels tall image option, hard crop mode
     add_image_size( 'profile', 300, 300, array( 'center', 'center' ) ); // adds 300 pixels wide by 300 pixels tall image option, hard crop mode
+    add_image_size( 'hero', 1600, 1100, array( 'center', 'center' ) ); // adds 1600 pixels wide by 1100 pixels tall image option, hard crop mode
     add_image_size( 'blog', 500, 300, array( 'center', 'center' ) ); // adds 300 pixels wide by 300 pixels tall image option, hard crop mode
     add_image_size( 'social', 800, 418, array( 'center', 'center' ) ); // adds 800 pixels wide by 418 pixels tall image option, hard crop mode
   }
@@ -155,6 +156,7 @@ add_action( 'admin_head', 'blockhaus_fix_svg' );
    
   function blockhaus_image_names( $sizes ) {
       return array_merge( $sizes, array(
+          'hero' => __( 'Hero' ),
           'landscape' => __( 'Landscape' ),
           'profile' => __( 'Profile' ),
           'blog' => __( 'Blog layout' ),

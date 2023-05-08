@@ -32,7 +32,7 @@ $description = get_field($post_type . '_page_description', "options");
 				
 			<?php
 			
-			if($postTypeMeta['page_description']):?>
+			if($description):?>
 
 				<div class="col-span-full"><?php echo $postTypeMeta['page_description'];?></div>
 	

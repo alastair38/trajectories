@@ -729,6 +729,11 @@ main {
   color: var(--wp--preset--color--neutral-dark-900);
 }
 
+ul.wp-block-post-template li {
+  -webkit-margin-before: 0;
+          margin-block-start: 0;
+}
+
 .container {
   width: 100%;
 }
@@ -943,9 +948,6 @@ main {
   padding-bottom: 0.25rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  --tw-shadow: 2px 2px 0 0 currentColor;
-  --tw-shadow-colored: 2px 2px 0 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .blockhaus-search input[type='search']:focus-visible {
@@ -1081,12 +1083,6 @@ iframe {
 }
 
 /* POSTS & PAGES */
-
-.is-style-button-retro .wp-block-button__link {
-  --tw-shadow: 2px 2px 0 0 currentColor;
-  --tw-shadow-colored: 2px 2px 0 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
 
 .is-style-button-rounded .wp-block-button__link {
   border-radius: 9999px;
@@ -1740,16 +1736,16 @@ input[type='text'], input[type='email'], textarea {
   z-index: 0;
 }
 
-.z-10 {
-  z-index: 10;
-}
-
 .z-50 {
   z-index: 50;
 }
 
 .-z-10 {
   z-index: -10;
+}
+
+.z-10 {
+  z-index: 10;
 }
 
 .col-span-full {
@@ -1824,6 +1820,10 @@ input[type='text'], input[type='email'], textarea {
   display: block;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .flex {
   display: flex;
 }
@@ -1840,12 +1840,16 @@ input[type='text'], input[type='email'], textarea {
   display: none;
 }
 
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
 .aspect-video {
   aspect-ratio: 16 / 9;
 }
 
-.aspect-square {
-  aspect-ratio: 1 / 1;
+.aspect-hero {
+  aspect-ratio: 16 / 11;
 }
 
 .h-80 {
@@ -1878,10 +1882,6 @@ input[type='text'], input[type='email'], textarea {
 
 .h-0 {
   height: 0px;
-}
-
-.w-4\/5 {
-  width: 80%;
 }
 
 .w-80 {
@@ -1921,6 +1921,10 @@ input[type='text'], input[type='email'], textarea {
   width: 1.5rem;
 }
 
+.w-4\/5 {
+  width: 80%;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -1949,6 +1953,10 @@ input[type='text'], input[type='email'], textarea {
 
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-fill {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .grid-rows-\[12rem\] {
@@ -2007,10 +2015,17 @@ input[type='text'], input[type='email'], textarea {
   gap: 2rem;
 }
 
-.space-y-2 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+.gap-12 {
+  gap: 3rem;
+}
+
+.gap-x-12 {
+  -moz-column-gap: 3rem;
+       column-gap: 3rem;
+}
+
+.gap-y-6 {
+  row-gap: 1.5rem;
 }
 
 .space-y-6 > :not([hidden]) ~ :not([hidden]) {
@@ -2029,6 +2044,12 @@ input[type='text'], input[type='email'], textarea {
   --tw-space-y-reverse: 0;
   margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(3rem * var(--tw-space-y-reverse));
+}
+
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 
 .place-self-end {
@@ -2063,6 +2084,10 @@ input[type='text'], input[type='email'], textarea {
   border-radius: 9999px;
 }
 
+.rounded-blob {
+  border-radius: 61% 39% 36% 64% / 47% 50% 50% 53%;
+}
+
 .border {
   border-width: 1px;
 }
@@ -2085,10 +2110,6 @@ input[type='text'], input[type='email'], textarea {
 
 .border-neutral-light-500 {
   border-color: var(--wp--preset--color--neutral-light-500);
-}
-
-.bg-offset {
-  background-color: var(--wp--preset--color--offset);
 }
 
 .bg-yellow-300 {
@@ -2114,6 +2135,10 @@ input[type='text'], input[type='email'], textarea {
   background-color: var(--wp--preset--color--neutral-light-100);
 }
 
+.bg-offset {
+  background-color: var(--wp--preset--color--offset);
+}
+
 .bg-neutral-light-500 {
   background-color: var(--wp--preset--color--neutral-light-500);
 }
@@ -2128,6 +2153,10 @@ input[type='text'], input[type='email'], textarea {
 
 .bg-highlight {
   background-color: var(--wp--preset--color--highlight);
+}
+
+.bg-secondary {
+  background-color: var(--wp--preset--color--secondary);
 }
 
 .bg-curves {
@@ -2164,8 +2193,19 @@ input[type='text'], input[type='email'], textarea {
      object-fit: cover;
 }
 
-.p-2 {
-  padding: 0.5rem;
+.object-right {
+  -o-object-position: right;
+     object-position: right;
+}
+
+.object-left {
+  -o-object-position: left;
+     object-position: left;
+}
+
+.object-center {
+  -o-object-position: center;
+     object-position: center;
 }
 
 .p-6 {
@@ -2176,13 +2216,12 @@ input[type='text'], input[type='email'], textarea {
   padding: 0px;
 }
 
-.p-20 {
-  padding: 5rem;
+.p-2 {
+  padding: 0.5rem;
 }
 
-.py-20 {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+.p-20 {
+  padding: 5rem;
 }
 
 .py-6 {
@@ -2218,6 +2257,11 @@ input[type='text'], input[type='email'], textarea {
 .py-12 {
   padding-top: 3rem;
   padding-bottom: 3rem;
+}
+
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .py-2 {
@@ -2279,12 +2323,12 @@ input[type='text'], input[type='email'], textarea {
   font-size: var(--wp--preset--font-size--large);
 }
 
-.font-black {
-  font-weight: 900;
-}
-
 .font-bold {
   font-weight: 700;
+}
+
+.font-black {
+  font-weight: 900;
 }
 
 .uppercase {
@@ -2295,12 +2339,12 @@ input[type='text'], input[type='email'], textarea {
   font-style: italic;
 }
 
-.leading-10 {
-  line-height: 2.5rem;
-}
-
 .leading-snug {
   line-height: 1.375;
+}
+
+.leading-10 {
+  line-height: 2.5rem;
 }
 
 .leading-6 {
@@ -2351,12 +2395,6 @@ input[type='text'], input[type='email'], textarea {
   text-decoration-thickness: 2px;
 }
 
-.shadow-retro {
-  --tw-shadow: 2px 2px 0 0 currentColor;
-  --tw-shadow-colored: 2px 2px 0 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
 .shadow-md {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
@@ -2369,8 +2407,22 @@ input[type='text'], input[type='email'], textarea {
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
+.ring-2 {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
 .ring-transparent {
   --tw-ring-color: transparent;
+}
+
+.ring-offset-2 {
+  --tw-ring-offset-width: 2px;
+}
+
+.ring-offset-accent-default {
+  --tw-ring-offset-color: var(--wp--preset--color--accent);
 }
 
 .backdrop-blur {
@@ -2469,12 +2521,26 @@ figcaption {
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
+.hover\:ring-2:hover {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
 .hover\:ring-highlight:hover {
   --tw-ring-color: var(--wp--preset--color--highlight);
 }
 
 .hover\:ring-offset:hover {
   --tw-ring-color: var(--wp--preset--color--offset);
+}
+
+.hover\:ring-secondary:hover {
+  --tw-ring-color: var(--wp--preset--color--secondary);
+}
+
+.hover\:ring-offset-2:hover {
+  --tw-ring-offset-width: 2px;
 }
 
 .focus\:border-none:focus {
@@ -2502,6 +2568,12 @@ figcaption {
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
+.focus\:ring-2:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
 .focus\:ring-highlight:focus {
   --tw-ring-color: var(--wp--preset--color--highlight);
 }
@@ -2512,6 +2584,14 @@ figcaption {
 
 .focus\:ring-transparent:focus {
   --tw-ring-color: transparent;
+}
+
+.focus\:ring-secondary:focus {
+  --tw-ring-color: var(--wp--preset--color--secondary);
+}
+
+.focus\:ring-offset-2:focus {
+  --tw-ring-offset-width: 2px;
 }
 
 .focus-visible\:outline-none:focus-visible {
@@ -2571,16 +2651,16 @@ figcaption {
     white-space: normal;
   }
 
-  .md\:col-span-2 {
-    grid-column: span 2 / span 2;
-  }
-
   .md\:col-span-1 {
     grid-column: span 1 / span 1;
   }
 
   .md\:col-span-3 {
     grid-column: span 3 / span 3;
+  }
+
+  .md\:col-span-2 {
+    grid-column: span 2 / span 2;
   }
 
   .md\:col-start-1 {
