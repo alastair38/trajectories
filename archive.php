@@ -9,6 +9,8 @@
 
 get_header();
 
+$cols = "md:grid-cols-1";
+
 if(is_post_type_archive( 'project' )):
 	$cols = 'md:grid-cols-3';
 endif;
@@ -27,7 +29,12 @@ $description = get_field($post_type . '_page_description', "options");
 			<div class="py-6 px-2 lg:p-6 bg-primary-default grid my-6 lg:my-12 rounded-md w-11/12 md:w-3/4 mx-auto grid-cols-1 <?php echo $cols;?> gap-6">
 
 			<div class="col-span-full">
-				<?php echo blockhaus_custom_form($post_type_obj->labels->name, $post_type); ?>
+				
+				<?php if($post_type_obj):
+				
+				echo blockhaus_custom_form($post_type_obj->labels->name, $post_type); 
+				
+				endif; ?>
 			</div>
 				
 			<?php

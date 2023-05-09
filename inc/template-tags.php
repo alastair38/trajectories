@@ -162,57 +162,51 @@ function blockhaus_get_custom_post_types() {
 	return $post_types;
 }
 
-function blockhaus_header_layout() {
 
+function blockhaus_archive_title($title, $original_title, $prefix) {
+	if(is_tax()) {
+		$title = sprintf( __('%1$s', 'blockhaus'), $original_title);
+	}
+	return $title;
+}
+
+add_filter('get_the_archive_title', 'blockhaus_archive_title', 10, 3);
+	
+function blockhaus_header_layout() {
+	
 	$header = new stdClass;
-	$header->showImage = false;
-	$header->background = false;
+	$header->title = get_the_archive_title();
+	$header->image = '';
+	$header->background = '';
 	$post_type = get_post_type();
 
-	if(is_archive() && ! is_search()):
-
-		if(function_exists('get_field')):
-		$headerSettings = get_field(get_post_type() . '_page_settings', 'options');
-			if($headerSettings):
-			$header->showImage = $headerSettings['header_image'];
-			$header->background =  $headerSettings['background_color'];
-			endif;
-		endif;
-
+	if(function_exists('get_field') && is_archive() && ! is_search()):
+		$headerSettings = get_field($post_type . '_page_settings', 'options');
 		$header->title = get_the_archive_title();
-
-	elseif ( is_home() && ! is_front_page() ):
-
-		if(function_exists('get_field')):
-		$headerSettings = get_field(get_post_type() . '_page_settings', 'options');
-			if($headerSettings):
-				$header->showImage = $headerSettings['header_image'];
-				$header->background =  $headerSettings['background_color'];
-			endif;
+		if($headerSettings):
+			$header->image = $headerSettings['header_image'];
+			$header->background = $headerSettings['background_color'];
 		endif;
-
-		$header->title = single_post_title('',false);
-
-	elseif (is_search()):
-
-		if(function_exists('get_field')):
-		// $header->image = get_field('search_header', 'options');
-		// $header->background =  get_field('search_choose_background', 'options');
-		endif;
-
-		$header->title = 	'<span class="underline decoration-accent-secondary decoration-4">Search results for: ' . get_search_query() . '</span>';
-
-	else:
-
-		if(function_exists('get_field')):
-		$header->showImage = get_field('background_image_layout');
-		$header->background =  get_field('background_color');
-		endif;
-
-		$header->title = get_the_title();
-
 	endif;
 
+	if(function_exists('get_field') && (is_home() && ! is_front_page())):
+		$headerSettings = get_field($post_type . '_page_settings', 'options');
+		$header->title = single_post_title('',false);
+		if($headerSettings):
+			$header->image = $headerSettings['header_image'];
+			$header->background = $headerSettings['background_color'];
+		endif;
+	endif;
+
+	if(function_exists('get_field') && is_singular()):
+		$header->image = get_field('background_image_layout');
+		$header->background = get_field('background_color');
+		$header->title = get_the_title();
+	endif;
+
+	if(function_exists('get_field') && is_search()):
+		$header->title = 	'<span class="underline decoration-accent-secondary decoration-4">Search results for: ' . get_search_query() . '</span>';
+	endif;
 
 	return $header;
 }

@@ -84,8 +84,8 @@ function blockhaus_meta_description() {
     if ( $post_types ) { // If there are any custom public post types.
         foreach ( $post_types  as $post_type ) { // loop through
           if ( is_post_type_archive($post_type) ) { // check if on the archive page for that post type
-            $page_settings = get_field($post_type . "_page_description", "options"); // get post type page description from options page
-            $description = $page_settings;
+            $page_settings = get_field($post_type . "_page_settings", "options"); // get post type page description from options page
+            $description = $page_settings['page_description'];
             if($description): // if description exists, add it to the head
             $description = strip_tags($description);
             $description = normalize_whitespace($description);
