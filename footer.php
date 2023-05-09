@@ -22,7 +22,7 @@
 
 
 <div class="rounded-md space-y-4 flex flex-col items-center">
-	<p class="font-black">Follow us</p>
+	<p class="font-black sr-only">Follow us on social media</p>
   <?php echo blockhaus_display_social_profiles();?>
 </div>
 

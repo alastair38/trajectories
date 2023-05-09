@@ -164,7 +164,7 @@ function blockhaus_get_custom_post_types() {
 
 
 function blockhaus_archive_title($title, $original_title, $prefix) {
-	if(is_tax()) {
+	if(is_tax() || is_category() || is_tag()) {
 		$title = sprintf( __('%1$s', 'blockhaus'), $original_title);
 	}
 	return $title;
