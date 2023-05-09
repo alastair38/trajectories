@@ -49,7 +49,6 @@
   bottom: 1rem;
   left: 1rem;
   clip-path: polygon(0 0, 100% 100%, 0 100%);
-  /* background-color: var(--wp--preset--color--accent-secondary); */
   @apply bg-grain-dots bg-highlight rounded-bl-md;
 }
 
@@ -90,32 +89,6 @@
   background-color: var(--wp--preset--color--accent-tertiary);
   @apply bg-grain-dots rounded-br-md;
 }
-
-/* .blockhaus-mission:after {
-  content: '';
-  position: absolute;
-  display: block;
-  width: 100px;
-  height: 100px;
-  bottom: 1rem;
-  left: 1rem;
-  clip-path: polygon(0 0, 100% 100%, 0 100%);
-  background-color: var(--wp--preset--color--accent);
-  @apply bg-grain-dots rounded-bl-md;
-}
-
-.blockhaus-mission:before {
-  content: '';
-  position: absolute;
-  display: block;
-  width: 100px;
-  height: 100px;
-  top: 1rem;
-  right: 1rem;
-  clip-path: polygon(100% 0, 0 0, 100% 100%);
-  background-color: var(--wp--preset--color--accent);
-  @apply bg-grain-dots rounded-tr-md;
-} */
 
 [class*='blockhaus-profile'] img {
   @apply w-full shadow-md rounded-md;
@@ -323,4 +296,11 @@ form#loginform [type='text'] {
 
 form#loginform input#wp-submit {
   @apply bg-primary-default py-1 px-3 rounded-md border ring-4 ring-transparent border-current cursor-pointer hover:ring-highlight focus:ring-highlight;
+}
+
+/* BLOCKHAUS FEATURED & HERO - ADD BLOCK PADDING WHEN INSERTED ANYWHERE APART FROM HOME PAGE */
+
+:not(.home) > .blockhaus-featured,
+:not(.home) > .blockhaus-hero {
+  @apply py-6;
 }

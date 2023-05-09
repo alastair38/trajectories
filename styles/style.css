@@ -839,7 +839,6 @@ ul.wp-block-post-template li {
   left: 1rem;
   -webkit-clip-path: polygon(0 0, 100% 100%, 0 100%);
           clip-path: polygon(0 0, 100% 100%, 0 100%);
-  /* background-color: var(--wp--preset--color--accent-secondary); */
   border-bottom-left-radius: 0.375rem;
   background-color: var(--wp--preset--color--highlight);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%230f0f0f' fill-opacity='.5' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
@@ -889,32 +888,6 @@ ul.wp-block-post-template li {
   border-bottom-right-radius: 0.375rem;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%230f0f0f' fill-opacity='.5' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
-
-/* .blockhaus-mission:after {
-  content: '';
-  position: absolute;
-  display: block;
-  width: 100px;
-  height: 100px;
-  bottom: 1rem;
-  left: 1rem;
-  clip-path: polygon(0 0, 100% 100%, 0 100%);
-  background-color: var(--wp--preset--color--accent);
-  @apply bg-grain-dots rounded-bl-md;
-}
-
-.blockhaus-mission:before {
-  content: '';
-  position: absolute;
-  display: block;
-  width: 100px;
-  height: 100px;
-  top: 1rem;
-  right: 1rem;
-  clip-path: polygon(100% 0, 0 0, 100% 100%);
-  background-color: var(--wp--preset--color--accent);
-  @apply bg-grain-dots rounded-tr-md;
-} */
 
 [class*='blockhaus-profile'] img {
   width: 100%;
@@ -1289,6 +1262,13 @@ form#loginform input#wp-submit:hover {
 
 form#loginform input#wp-submit:focus {
   --tw-ring-color: var(--wp--preset--color--highlight);
+}
+
+/* BLOCKHAUS FEATURED & HERO - ADD BLOCK PADDING WHEN INSERTED ANYWHERE APART FROM HOME PAGE */
+
+:not(.home) > .blockhaus-featured, :not(.home) > .blockhaus-hero {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 /* WP FORMS OVERRIDES */
@@ -1775,11 +1755,6 @@ input[type='text'], input[type='email'], textarea {
   margin-bottom: 1.5rem;
 }
 
-.my-12 {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-}
-
 .mt-0 {
   margin-top: 0px;
 }
@@ -2040,16 +2015,16 @@ input[type='text'], input[type='email'], textarea {
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
-.space-y-12 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(3rem * var(--tw-space-y-reverse));
-}
-
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+
+.space-y-12 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(3rem * var(--tw-space-y-reverse));
 }
 
 .place-self-end {
@@ -2720,6 +2695,10 @@ figcaption {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .md\:grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
   .md\:flex-row {
     flex-direction: row;
   }
@@ -2850,10 +2829,6 @@ figcaption {
 
   .lg\:p-6 {
     padding: 1.5rem;
-  }
-
-  .lg\:p-16 {
-    padding: 4rem;
   }
 
   .lg\:py-32 {

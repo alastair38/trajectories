@@ -7,8 +7,8 @@
  */
 ?>
 
-<!-- wp:query {"queryId":0,"query":{"perPage":"2","pages":"2","offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"taxQuery":{"category":[],"label":[9]}},"tagName":"section","displayLayout":{"type":"list","columns":2},"layout":{"type":"default"}} -->
-<section class="wp-block-query"><!-- wp:heading {"className":"col-span-full font-black underline"} -->
+<!-- wp:query {"queryId":0,"query":{"perPage":"2","pages":"2","offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"taxQuery":{"category":[],"label":[9]}},"tagName":"section","displayLayout":{"type":"list","columns":2}, "className":"blockhaus-featured","layout":{"type":"default"}} -->
+<section class="wp-block-query blockhaus-featured"><!-- wp:heading {"className":"col-span-full font-black underline"} -->
 <h2 class="wp-block-heading col-span-full font-black underline">Featured articles</h2>
 <!-- /wp:heading -->
 
