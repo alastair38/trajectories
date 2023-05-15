@@ -39,13 +39,13 @@ if( have_rows('funder', 'option') ):?>
 			// Load sub field value.
 			$logo_img = get_sub_field('logo');
 			$name = get_sub_field('name');
-			$url = get_sub_field('web_url');
+			$url = get_sub_field('website');
 			// echo '<code class="text-white">';
 			// print_r($logo_img);
 			// echo '</code>';
 			?>
 			<li class="flex-1 flex flex-col gap-4 items-center justify-center">
-				<a class="flex-1 bg-primary-default" href="<?php echo $url;?>" rel="external">
+				<a aria-label="<?php echo $name;?>" class="flex-1 bg-primary-default" href="<?php echo $url;?>" rel="external">
 				<img class="object-contain px-2 h-full" height="<?php echo $logo_img['sizes']['medium-height'];?>" width="<?php echo $logo_img['sizes']['medium-width'];?>" src="<?php echo $logo_img['sizes']['medium'];?>" alt="<?php echo $logo_img['alt'];?>" loading="lazy"/>
 			</a>
 			</li>
