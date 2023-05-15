@@ -21,10 +21,7 @@
 <div class="place-items-center bg-primary-default">
 
 
-<div class="rounded-md space-y-4 flex flex-col items-center">
-	<p class="font-black sr-only">Follow us on social media</p>
-  <?php echo blockhaus_display_social_profiles();?>
-</div>
+
 
 
 <?php
@@ -62,6 +59,11 @@ endif;
 
 ?>
 	</ul>
+	
+	<div class="rounded-md space-y-4 flex flex-col items-center">
+	<p class="font-black sr-only">Follow us on social media</p>
+  <?php echo blockhaus_display_social_profiles();?>
+</div>
 
 <p class="flex justify-center text-sm p-6">
 		<?php
