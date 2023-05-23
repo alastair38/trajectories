@@ -33,18 +33,9 @@ endif;
 
 	<div class="entry-content mt-auto">
 		<?php
+		
+		the_excerpt();
 
-		if(('publication' === get_post_type()) || ('link' === get_post_type())):
-
-			the_content();
-
-		else:
-
-			the_excerpt();
-
-		endif;
-
-	
 		$external_site = get_field('external_site');
 
 		if($external_site):

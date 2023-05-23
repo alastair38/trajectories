@@ -169,3 +169,16 @@ add_action( 'admin_head', 'blockhaus_fix_svg' );
   // Add excerpt support to pages
   
   add_post_type_support('page', 'excerpt' );  
+  
+
+// Custom excerpt to take the first paragraph of content if the_excerpt does not exist
+
+  add_filter( 'wp_trim_excerpt', 'blockhaus_custom_excerpt', 10, 2 );
+
+function blockhaus_custom_excerpt($text, $raw_excerpt) {
+    if( ! $raw_excerpt ) {
+        $content = apply_filters( 'the_content', get_the_content() );
+        $text = substr( $content, 0, strpos( $content, '</p>' ) + 4 );
+    }
+    return $text;
+}
