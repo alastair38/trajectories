@@ -46,7 +46,7 @@ endif;
 		<?php endif;?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
+	<footer class="entry-footer mt-6">
 
 		<?php get_template_part('components/permalink'); ?>
 		
